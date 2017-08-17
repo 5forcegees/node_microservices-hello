@@ -29,6 +29,15 @@ Structure:
     test/ - contains the tests for the microservice
         test.js  - contains the test logic and examples.  
             if this gets too big we should break it out into separate files
+            
+    postman/ - contains a postman collection designed to demonstrate the capabilities of the microservice
+        newman/ - contains a newman scipt to execute the postman collection
+            usage: 
+                # from the microservice root folder
+                cd postman/newman
+                # execute script
+                node newman.js
+
         
 ##To Run Mocha and Generate Istanbul Reports
 
@@ -37,3 +46,5 @@ Structure:
 ```
 * will create ./coverage where report html will output
 * if you have any issues running istanbul try installing globally
+
+

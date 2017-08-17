@@ -1,0 +1,55 @@
+{
+	"variables": [],
+	"info": {
+		"name": "hello",
+		"_postman_id": "4a81efc1-8864-2aef-18cc-645e06e7b64f",
+		"description": "Provides interface for demonstrating the capabilities of each node microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "127.0.0.1:3010/apigateway?firstname=Bob&lastname=Bobberson",
+			"request": {
+				"url": {
+					"raw": "127.0.0.1:3010/apigateway?firstname=Bob&lastname=Bobberson",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3010",
+					"path": [
+						"apigateway"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Bob",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "lastname",
+							"value": "Bobberson",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "service",
+						"value": "hello",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Demonstrates the functionality of the Hello service.\n\nAccepts get parameters:\n\tfirstname: string\n\tlastname: string\n\t\nReturns json object:\n{\n\tfirstname: string,\n\tlastname: string,\n\toutputString: \"Hello Firstname Lastname\"\n\t}\n}\n"
+			},
+			"response": []
+		}
+	]
+}
