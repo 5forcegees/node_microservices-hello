@@ -4,17 +4,20 @@ var Promise = require('bluebird'),
     logTypes = logging.logTypes;
 
 
-module.exports.responseTransformer = function (parameterObject) {
+module.exports.responseTransformer = function (httpRequestObject) {
 
     return Promise.all([
-        nameMapping(parameterObject),
-        value2Mapping(parameterObject)
+        firstNameMapping(httpRequestObject),
+        lastNameMapping(httpRequestObject)
     ])
         .then(function (allResponseData) {
             let returnObject = {};
 
-            returnObject.name = allResponseData[0];
-            returnObject.value2 = allResponseData[1];
+            returnObject.firstname = allResponseData[0];
+            returnObject.lastname = allResponseData[1];
+            returnObject.outputString =
+                "Hello " + capitalizeFirstLetter(returnObject.firstname) + " "
+                + capitalizeFirstLetter(returnObject.lastname);
 
             generalLogger.log.info(logTypes.fnInside({returnObject: returnObject}), 'hello transformer returnObject');
 
@@ -29,18 +32,27 @@ module.exports.responseTransformer = function (parameterObject) {
 }
 
 // return object mapping functions
-function nameMapping(parameterObject) {
-    if (parameterObject.hasOwnProperty('name')) {
-        return parameterObject.name;
+function firstNameMapping(httpRequestObject) {
+    if (httpRequestObject && httpRequestObject.hasOwnProperty('query')
+        && httpRequestObject.query.hasOwnProperty('firstname') ) {
+
+        return httpRequestObject.query.firstname;
     } else {
         return null;
     }
 }
 
-function value2Mapping(parameterObject) {
-    if (parameterObject.hasOwnProperty('value2')) {
-        return parameterObject.value2;
+function lastNameMapping(httpRequestObject) {
+    if (httpRequestObject && httpRequestObject.hasOwnProperty('query')
+        && httpRequestObject.query.hasOwnProperty('lastname') ) {
+
+        return httpRequestObject.query.lastname;
     } else {
         return null;
     }
+}
+
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

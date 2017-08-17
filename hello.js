@@ -20,12 +20,12 @@ module.exports = function hello(options) {
 
 function helloHandler(args, done) {
 
-    transactionLogger.log.trace("hello received request: ", args);
+    generalLogger.log.trace("hello received request: ", args);
 
     responseTransformer(args)
         .then(function (transformedResponse) {
 
-            transactionLogger.log.trace("\nhello returning transformedResponse:\n", transformedResponse);
+            generalLogger.log.trace("\nhello returning transformedResponse:\n", transformedResponse);
             done(null, {result: transformedResponse});
         })
         .catch(function (err) {
